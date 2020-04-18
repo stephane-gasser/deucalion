@@ -1,0 +1,25 @@
+
+<div class="row">
+  {% if category.get_problems %}
+  <div class="span5">
+    <h3>Problématiques</h3>
+    {{ object.introduction_problems|safe }}
+    <ul>
+      {% for pres in category.get_problems %}
+      <li><i class="icon-question-sign"></i> <a href="{{ pres.get_absolute_url }}">{{ pres }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  {% if category.get_technologies %}
+  <div class="span5">
+    <h3>Technologies</h3>
+    {{ object.introduction_technologies|safe }}
+    <ul>
+      {% for pres in category.get_technologies %}
+      <li><i class="icon-asterisk"></i> <a href="{{ pres.get_absolute_url }}">{{ pres }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</div>

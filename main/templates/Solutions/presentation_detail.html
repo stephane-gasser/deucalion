@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block meta_description %}{{ object.chapo|striptags }}{% endblock %}
+
+{% block main %}
+
+<ul class="breadcrumb">
+  {% block breadcrumbs %}
+  <li><a href="{{ object.main_category.get_absolute_url }}">{{ object.main_category }}</a> <span class="divider">/</span></li>
+  <li class="active">{{ object }}</li>
+  {% endblock %}
+</ul>
+
+{% block presentation_title %}
+<h1>{{ object }}</h1>
+{% endblock %}
+
+<div class="row">
+  <div class="span9">
+    {% block content %}
+    <div class="lead">{{ object.chapo|safe }}</div>
+    {{ object.body|safe }}  
+    {% endblock %}
+  </div>
+  <div class="span3">
+    <div class="column-aside">
+
+      {% block presentation_column %}
+      <div class="card">
+        {% include "Profiles/_user_card.html" with user=object.author %}
+      </div>
+      <div>
+        <h3>Voir aussi</h3>
+        <h4>Thématiques</h4>
+        <ul>
+          {% for cat in object.categories.all %}
+          <li><a href="{{ cat.get_absolute_url }}">{{ cat }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+    </div>
+    {% endblock %}
+  </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% if object.is_contacted %}
+
+{% if is_recipient %}
+<p>Coordonnées:</p>
+<dl>
+  <dt>Email</dt>
+  <dd>{{ object.discussiondisclosure.contact_email }}</dd>
+  <dt>Téléphone</dt>
+  <dd>{{ object.discussiondisclosure.contact_phone }}</dd>
+  <dt>Nom</dt>
+  <dd>{{ object.discussiondisclosure.contact_name }}</dd>
+  <dt>Entreprise</dt>
+  <dd>{{ object.discussiondisclosure.contact_company }}</dd>
+  <dt>Adresse</dt>
+  <dd>{{ object.discussiondisclosure.contact_address|linebreaksbr }}</dd>
+</dl>
+{% else %}
+<p>Vous avez transmis vos coordonées.</p>
+{% endif %}
+
+{% else %}
+
+{% if object.discussiondisclosure %}
+
+{% if object.discussiondisclosure.is_open %}
+{% if is_recipient %}
+<p>Demande de <strong>levée d'anonymat</strong> proposée.</p>
+{% else %}
+<p>Votre contact propose de <strong>lever votre anonymat</strong>.</p>
+<a href="{% url Messages_discussion_disclosure_agree object.secret_hash %}" class="btn btn-primary">Accepter</a>
+<a href="{% url Messages_discussion_disclosure_refuse object.secret_hash %}" class="btn">Refuser</a>
+{% endif %}
+{% else %}
+<p>Levée d'anonymat: {{ object.discussiondisclosure.get_status_display }}</p>
+{% endif %}
+
+{% else %}
+
+{% if object.is_active %}
+{% if is_recipient %}
+<form action="{% url Messages_discussion_disclosure_request object.secret_hash_reply %}" method="post">
+  <button {% if disclosure_cost > credits %}disabled{% endif %} type="submit" class="btn btn-primary">Demander la levée de l'anonymat</button>
+</form>
+<p>Il vous coûtera {{ disclosure_cost }} crédits pour obtenir ses coordonnées si votre interlocuteur accepte.</p>
+{% if disclosure_cost <= credits %}
+<p>Votre solde actuel est de <em>{{ credits }} crédit{{ credits|pluralize }}</em>.</p>
+{% else %}
+<p>Votre solde (<em>{{ credits }} crédit{{ credits|pluralize }}</em>) est
+    insuffisant. <a href="mailto:contact@deucalion.com">Contactez le
+    support</a>.</p>
+{% endif %}
+
+{% endif %}
+
+{% endif %}
+
+{% endif %}
+
+{% endif %}

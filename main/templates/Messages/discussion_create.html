@@ -1,0 +1,11 @@
+{% extends 'Profiles/profile_detail.html' %}
+
+{% load bootstrap_toolkit %}
+
+{% block content %}
+<form method="post" class="discussion-form">
+{% bootstrap_form form layout="vertical" %}
+<p>Votre interlocuteur va recevoir votre message anonymement.</p>
+<button type="submit" class="btn">Envoyer</button>
+</form>
+{% endblock %}

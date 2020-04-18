@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% load bootstrap_toolkit %}
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>{% block title %}{{ object|default:"Deucalion" }}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Deucalion permet à des entreprises technologiques d'accroître leur visibilité.{% endblock %}">
+
+  <!--link rel="shortcut icon" href="{{ STATIC_URL }}images/favicon.ico"-->
+  <!--link rel="apple-touch-icon" href="{{ STATIC_URL }}images/apple-touch-icon.png"-->
+  {% bootstrap_stylesheet_tag %}
+
+  {% load compressed %}
+  {% compressed_css 'all' %} {# All css file (see setting pipeline) #}
+  {% compressed_js 'all' %} {# All js file (see setting pipeline) #}
+  {% block extra_script %}
+  {% endblock %}
+
+</head>
+
+<body>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+	<a class="brand" href="/">{% block brand %}Deucalion{% endblock %}</a>
+	{% block navbar %}
+        <ul class="nav">
+          <li><a href="/">Accueil</a></li>
+          <!--li><a href="http://www.deucalion.net">À propos</a></li-->
+          <li><a href="mailto:contact@deucalion.net">Contact</a></li>
+          <li><a href="{% url Content_index %}">Thématiques</a></li>
+        </ul>
+        <ul class="nav pull-right">
+          {% if user.is_authenticated %}
+          <li><a href="{% url Messages_list %}">Vos messages</a></li>
+          <li><a href="{% url Profile_credit_line %}">Relevé de crédits</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Connecté en tant que {{ user }} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              {% if user.is_staff %}
+              <li><a target="blank" href="/admin/">Administration du site</a></li>
+              {% endif %}
+              <li><a href="{% url logout %}?next=/">Déconnexion</a></li>
+            </ul>
+         </li>
+          {% else %}
+          <li><a href="{% url login %}">Connexion</a></li>
+          {% endif %}
+       </ul>
+	{% endblock %}
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container"> 
+      {% block header %}
+      {% endblock %}
+    </div>
+  </header>
+  
+  <div id="container" class="container">
+    {% block main %}
+    {% block content %}
+    {% endblock %}
+    {% endblock %}
+ </div>
+
+  <footer class="footer">
+    <div class="container"> 
+      {% block footer %}
+      <p>
+        © {% now "Y" %} <a target="_blank" href="http://promethee-sas.fr/">Prométhée SAS</a> -
+        <a href="/mentions-legales/">Mentions légales</a>
+      </p>
+      {% endblock %}
+    </div>
+  </footer>
+  
+</body>
+</html>

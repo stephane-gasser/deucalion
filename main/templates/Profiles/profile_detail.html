@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block extra_script %}
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASyusTWOml312F3KxZYOAQ2ClqVrcItv8&sensor=true"></script>
+{% endblock %}
+
+{% block title %}{{ object.company|default:user }}{% endblock %}
+
+{% block main %}
+
+<ul class="breadcrumb">
+  {% block breadcrumbs %}
+  <li>Profiles</li>
+  <li class="active">{{ object.company|default:user }}</li>
+  {% endblock %}
+</ul>
+
+<h1>{{ object.company|default:user }}</h1>
+
+<div class="row">
+  <div class="span9">
+   {% block content %}
+   {{ object.company.presentation|safe }}
+   {% endblock %}
+  </div>
+  <div class="span3">
+    <div class="column-aside">
+      {% block presentation_column %}
+      <div class="card">
+        {% include "Profiles/_user_card.html" with user=object.user %}
+      </div>
+      <div>
+        <p>
+        <a class="btn btn-primary" href="{% url Messages_new_discussion object.pk %}">Entrer en relation anonymement</a>
+        </p>
+      </div>
+      <div>
+        {{ object.bio|safe }}
+      </div>
+      {% if object.company.location %}
+      <div>
+        <div id="map"></div>
+        <address>{{ object.company.location }}</address>
+        <script type="text/javascript">
+        $(function () {
+        var geocoder = new google.maps.Geocoder();
+      geocoder.geocode( { 'address': '{{ object.company.location }}'}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+               var map = new google.maps.Map(document.getElementById("map"), {center: results[0].geometry.location, zoom:12});
+               var marker = new google.maps.Marker({position: results[0].geometry.location, map: map});
+          }
+        });
+       });
+        </script>
+      </div>
+      {% endif %}
+   </div>
+    {% endblock %}
+  </div>
+</div>
+</div>
+{% endblock %}

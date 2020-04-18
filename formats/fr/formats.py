@@ -1,0 +1,2 @@
+SHORT_DATE_FORMAT ="d/m/Y"
+TIME_FORMAT ="H:i"

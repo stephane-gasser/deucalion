@@ -1,0 +1,19 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{% if title %}{{ title }} | {% endif %}Site Administration{% endblock %}
+
+{% block disabled-extrahead %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/tinymce_sanitize.js"></script>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/admin.css" />
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">Admin interface</h1>
+{% if user and user.is_staff %}
+<ul id="admin_modes">
+  <li>    <a href="/">Back to frontend</a></li>
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

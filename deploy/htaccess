@@ -1,0 +1,9 @@
+AddHandler fcgid-script .fcgi
+RewriteEngine On
+
+#RewriteCond %{HTTP_HOST} !^www.example.com$ [NC]
+#RewriteCond %{HTTP_HOST} !^$
+#RewriteRule ^(.*) http://www.example.com/$1 [L,R,NE]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ django.fcgi/$1 [QSA,L]

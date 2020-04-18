@@ -1,0 +1,67 @@
+{% extends "Messages/base.html" %}
+
+{% load bootstrap_toolkit %}
+{% load thumbnail %}
+
+{% block content %}
+<h1>Demande N° {{ object.id }}</h1>
+<h2>{{ object.subject }}</h2>
+
+{% for message in object.message_set.all %}
+<blockquote class="message {% if message.is_reply %}message-reply{% endif %}" {% if forloop.last %}id="latest"{% endif %}>
+  {% if message.is_reply %}
+  <div class="recipient pull-left">
+    {% thumbnail object.to_user.profile.picture "30x50" as im %}
+    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+    {% empty %}
+    <img width="30" src="{{ STATIC_URL }}images/default_avatar.png"/>
+    {% endthumbnail %}
+    <br/>
+    {{ object.to_user.profile }}
+  </div>
+  {% endif %}
+  <div class="message-body">
+    {{ message.message|linebreaksbr }}
+  </div>
+  <small>
+    {{ object.created|date:"SHORT_DATE_FORMAT" }} à {{ object.created|date:"TIME_FORMAT" }}
+  </small>
+</blockquote>
+{% endfor %}
+
+{% block actions %}
+
+<hr/>
+
+{% if is_recipient %}
+<p><em>{{ object.get_status_display }}</em></p>
+{% if object.is_active %}
+<form action="{% url Messages_discussion_set_status object.secret_hash_reply "archived" %}" method="get">
+  <button class="btn btn-danger" type="submit">Décliner</button>
+</form>
+
+{% endif %}
+{% endif %}
+
+{% block disclosure_actions %}
+{% include "Messages/_disclosure_actions.html" %}
+{% endblock %}
+
+
+<hr/>
+
+{% endblock %}
+
+{% if object.is_active %}
+<div id="form">
+{% block form %}
+<form method="post" class="discussion-form">
+  {% bootstrap_form form layout="vertical" %}
+  <p>Votre interlocuteur va recevoir votre message anonymement.</p>
+  <button type="submit" class="btn">Envoyer</button>
+</form>
+{% endblock %}
+</div>
+{% endif %}
+
+{% endblock %}

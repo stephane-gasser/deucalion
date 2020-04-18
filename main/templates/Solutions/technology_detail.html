@@ -1,0 +1,11 @@
+{% extends "Solutions/presentation_detail.html" %}
+
+{% block breadcrumbs %}
+  <li><a href="{{ object.main_category.get_absolute_url }}">{{ object.main_category }}</a> <span class="divider">/</span></li>
+  <li><a href="{{ object.main_category.get_absolute_url }}">Technologies</a> <span class="divider">/</span></li>
+  <li class="active">{{ object }}</li>
+{% endblock %}
+
+{% block presentation_title %}
+<h1><i class="icon-asterisk"></i>{{ object }}</h1>
+{% endblock %}

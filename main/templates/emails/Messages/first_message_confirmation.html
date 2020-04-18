@@ -1,0 +1,11 @@
+{% extends "emails/base.html" %}
+
+{% block content %}
+<p><strong>Votre message à {{ message.discussion.to_user.profile|default:message.discussion.to_user }} a bien été envoyé.</p>
+<ul>
+  <li>
+    <a href="http://{{ site.domain }}{{ message.get_absolute_url }}">
+      Lien de suivi de ce message</a>
+  </li>
+</ul>
+{% endblock %}

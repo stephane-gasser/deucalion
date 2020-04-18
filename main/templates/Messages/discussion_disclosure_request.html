@@ -1,0 +1,17 @@
+{% extends "Messages/discussion_detail.html" %}
+
+{% load bootstrap_toolkit %}
+{% block disclosure_actions %}{% endblock %}
+
+{% block form %}
+
+<h3>Demande de levée d'anonymat</h3>
+
+<p>Les informations suivantes seront transmises à votre contact, s'il accepte.</p>
+
+<form method="post" class="discussion-form">
+  {% bootstrap_form form layout="vertical" %}
+ <button type="submit" class="btn">Proposer</button>
+</form>
+
+{% endblock %}

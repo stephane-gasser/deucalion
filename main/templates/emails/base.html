@@ -1,0 +1,40 @@
+<html>
+  <body bgcolor="#f6f6f6" marginwidth="0" marginheight="0" topmargin="0" leftmargin="0">
+
+    <table cellspacing="0" cellpadding="0" bgcolor="#f6f6f6" align="center" width="100%">
+      <tr>
+        <td bgcolor="#f7f7f7">&nbsp;
+       </td>
+      </tr>
+      <tr>
+       <td>
+          <table bgcolor="#ffffff" cellspacing="0" cellpadding="0"
+                 align="center" width="600">
+            <tr>
+              <td>&nbsp;</td>
+              <td>
+                {% block content %}
+                {% endblock %}
+             </td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td align="right">
+                <p>
+                  <a href="http://{{ site.domain }}">
+                    {{ site.name }}
+                  </a>
+                  <p>
+              </td>
+              <td>&nbsp;</td>
+          </table>
+        </td>
+      </tr>
+     <tr>
+        <td bgcolor="#f7f7f7">&nbsp;
+       </td>
+      </tr>
+    </table>
+
+  </body>

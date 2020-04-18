@@ -1,0 +1,49 @@
+{% extends "Messages/base.html" %}
+
+{% block content %}
+
+<h1>Demandes</h1>
+
+<ul class="nav nav-pills">
+  <li {% if type == "active" %}class="active"{% endif %}>
+    <a href="?type=active">En cours</a>
+  </li>
+  <li {% if type == "contacted" %}class="active"{% endif %}>
+    <a href="?type=contacted">Contactés</a>
+  </li>
+  <li {% if type == "archived" %}class="active"{% endif %}>
+    <a href="?type=archived">Déclinés</a>
+  </li>
+  <li {% if type == "all" %}class="active"{% endif %}>
+    <a href="?type=all">Tous</a>
+  </li>
+</ul>
+
+{% if object_list %}
+<table class="table table-hover table-condensed">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Référence</th>
+      <th>Objet</th>
+      <th>État</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for discussion in object_list %}
+    <tr>
+      <td>{{ discussion.created|date:"SHORT_DATE_FORMAT" }}</td>
+      <td>{{ discussion.id }}</td>
+      <td>{{ discussion.subject }}</td>
+      <td>{{ discussion.get_status_display }}</td>
+      <td><a href="{{ discussion.get_reply_url }}">Détails</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>Aucun message.</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "emails/base.html" %}
+
+{% block content %}
+
+{% block intro %}
+<p><strong>Votre interlocuteur souhaite connaître votre identité.</strong></p>
+{% endblock %}
+
+<p>Vous souhaitez :</p>
+{% block actions %}
+<ul>
+  <li>
+    <a href="http://{{ site.domain }}{% url Messages_discussion_disclosure_agree discussion_disclosure.discussion.secret_hash %}#latest">
+      Lever votre anonymat</a>
+  </li>
+  <li>
+    <a href="http://{{ site.domain }}{% url Messages_discussion_disclosure_refuse discussion_disclosure.discussion.secret_hash %}#latest">
+      Refuser</a>
+  </li>
+</ul>
+{% endblock %}
+{% endblock %}

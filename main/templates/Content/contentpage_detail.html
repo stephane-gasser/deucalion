@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block meta_description %}{{ object.chapo|striptags }}{% endblock %}
+
+{% block main %}
+
+<div class="row">
+  <div class="span9">
+    {% block content %}
+    {{ object.content|safe }}  
+    {% endblock %}
+  </div>
+
+  <div class="span3">
+    <div class="column-aside">
+      {% block presentation_column %}
+      <div class="card">
+        {% include "Profiles/_user_card.html" with user=object.author %}
+      </div>
+    </div>
+    {% endblock %}
+  </div>
+</div>
+</div>
+{% endblock %}

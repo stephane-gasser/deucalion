@@ -1,0 +1,13 @@
+{% load thumbnail %}
+<a class="pull-right" href="{{ user.profile.get_absolute_url }}">
+  {% thumbnail user.profile.picture "100x100" as im %}
+  <img class="media-object" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+  {% empty %}
+  <img class="media-object" width="100" src="{{ STATIC_URL }}images/default_avatar.png"/>
+  {% endthumbnail %}
+</a>
+<div class="media-body">
+  {{ user.profile|default:user }}
+  {% if user.profile.role %}<p>{{ user.profile.role }}</p>{% endif %}
+  {% if user.profile.company %}<p><a href="{{ user.profile.get_absolute_url }}">{{ user.profile.company }}</a></p>{% endif %}
+</div>

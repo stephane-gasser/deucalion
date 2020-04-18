@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}{{ object }}{% endblock %}
+
+{% block meta_description %}{{ object.introduction|striptags|truncatewords:80 }}{% endblock %}
+
+{% block main %}
+
+<h1>{{ object }}</h1>
+
+{{ object.introduction|safe }}
+
+{% with object as category %}
+{% include "Solutions/_category_content.html" %}
+{% endwith %}
+
+{% endblock %}

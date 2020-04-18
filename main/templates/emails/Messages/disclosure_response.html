@@ -1,0 +1,24 @@
+{% extends "emails/base.html" %}
+
+{% block content %}
+
+{% block intro %}
+<p><strong>Votre interlocuteur a accepté de lever son anonymat.</strong></p>
+{% endblock %}
+
+<table>
+  <tr>
+    <td>&nbsp;</td>
+    <td>
+      <p>Email : {{ discussion_disclosure.contact_email }}</p>
+      <p>Téléphone : {{ discussion_disclosure.contact_phone }}</p>
+      <p>Nom : {{ discussion_disclosure.contact_name }}</p>
+      <p>Entreprise : {{ discussion_disclosure.contact_company }}</p>
+      <p>Adresse : {{ discussion_disclosure.contact_address|linebreaksbr }}</p>
+      <p><em>{{ discussion_disclosure.message|linebreaksbr }}</em></p>
+    </td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
+{% endblock %}

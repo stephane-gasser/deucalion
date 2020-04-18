@@ -1,0 +1,6 @@
+{% extends "emails/base.html" %}
+
+{% block content %}
+<p><strong>Votre interlocuteur est au regret de devoir décliner votre demande, qu'elle ne peut traiter.</strong></p>
+<p><em>{{ custom_message|linebreaksbr }}</em></p>
+{% endblock %}

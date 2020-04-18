@@ -1,0 +1,13 @@
+django==1.4.5
+django-extensions
+django-pipeline==1.1.27
+django-bootstrap-toolkit==2.15
+django-autoslug
+django-polymorphic==0.4.2
+django-wymeditor
+django-grappelli==2.4.9
+django-filebrowser
+south
+pil
+sorl-thumbnail
+django-email-html

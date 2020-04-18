@@ -1,0 +1,14 @@
+{% extends "emails/Messages/new_message.html" %}
+
+{% block intro %}
+<p><strong>{{ message.discussion.to_user.profile }} vous a répondu :</strong></p>
+{% endblock %}
+
+{% block actions %}
+<ul>
+  <li>
+    <a href="http://{{ site.domain }}{{ message.get_absolute_url }}">
+      Répondre à ce message</a>
+  </li>
+</ul>
+{% endblock %}
